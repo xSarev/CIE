@@ -2,8 +2,12 @@
 
 CIE is an application that encrypt images using RSA algorithm
 
-## Instalation
+## Prerequisites
 
+Magick++
+```bash
+sudo apt install graphicsmagick-libmagick-dev-compat
+```
 
 ## Usage
 
