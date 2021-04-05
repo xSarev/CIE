@@ -6,10 +6,26 @@
 #endif
 
 namespace Utils{
-    inline bool checkImageValid(std::string path){
-        std::ifstream readImage (path);
+    inline bool checkImageValid(std::string imagePath_)
+    {
+        std::ifstream readImage (imagePath_);
         if (readImage)
             return true;
-        return false;
+        throw "Provided path doesn't exist!";
+    }
+
+    inline void displayImage(std::string imagePath_)
+    {   
+        Magick::Image image;
+        try {
+            checkImageValid(imagePath_);
+            image.read(imagePath_);
+            image.display();
+        }
+        catch( std::exception &error)
+        {
+            std::cout << error.what() << std::endl;
+            return;
+        }
     }
 }
