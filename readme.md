@@ -11,7 +11,12 @@ Compile files
 
 Run 
 ```c++
-g++ main.cpp cie.cpp utils.cpp
+g++ -o <executable_name> main.cpp cie.cpp utils.cpp `Magick++-config --cxxflags --cppflags` `Magick++-config --ldflags --libs`
+```
+
+Execute
+```c++
+./<executable_name> <image_path>
 ```
 
 ## More features TBD
