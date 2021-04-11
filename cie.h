@@ -1,6 +1,10 @@
 #include <iostream>
 #include <vector>
 
+#if defined(__linux__)
+#include "Magick++.h"
+#endif
+
 class CImageEncryption 
 {
 public:
