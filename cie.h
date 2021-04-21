@@ -34,12 +34,12 @@ public:
     /**
      * @brief Encrypt provided image
      */
-    void encrypt(const int& a);
+    void encrypt(const Magick::Image& image);
 
     /**
      * @brief Decrypt provided image
      */
-    void decrypt(const int& a);
+    void decrypt(const Magick::Image& image);
 
     /**
      * dispalye choosen numbers --> to be deleted after
