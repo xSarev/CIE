@@ -24,8 +24,8 @@ int main(int argc, char **argv)
     pImageEncryption->generatePrimeNumbers();
     pImageEncryption->computeAlgorithm();
     pImageEncryption->display();
-    pImageEncryption->encrypt(17);
-    pImageEncryption->decrypt(17);
+    // pImageEncryption->encrypt();
+    // pImageEncryption->decrypt(17);
 
     // wait thread to finish
     thread1.join();

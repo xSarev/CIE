@@ -99,14 +99,40 @@ int CImageEncryption::coprime(const int& a, const int& b)
     return coprimesNumbers[rand()%coprimesNumbers.size()];
 }
 
-void CImageEncryption::encrypt(const int& a)
-{
-    std::cout << "\nEncrypted message : " << std::pow(a, this->m_publicKey);
+void CImageEncryption::encrypt(const Magick::Image& image)
+{   
+    Magick::Image encryptImage(image);
+
+    // get image width and height
+    unsigned int rows = encryptImage.rows();
+    unsigned int columns = encryptImage.columns();
+
+    // Ensure that there are no other references to this image.
+    encryptImage.modifyImage();
+
+    Magick::Pixels view(encryptImage);
+
+    // Declare default color
+    Magick::Color green("GREEN");
+
+    // std::cout << "\nEncrypted message : " << std::pow(a, this->m_publicKey);
+    for(unsigned int i = 0; i < rows; i++)
+    {
+        for(unsigned int j = 0; j < columns; j++)
+        {
+            Magick::PixelPacket *pixelCache = view.get(i, j, 1, 1);
+            // Magick::PixelPacket *pixel = pixelCache + row 
+        }
+    }
+
+    // Save changes to image.
+    view.sync();
+
 }
 
-void CImageEncryption::decrypt(const int& a)
+void CImageEncryption::decrypt(const Magick::Image& image)
 {   
-    double encrypt = std::pow(a, this->m_publicKey);
-    std::cout << "\nDecrypted message : " << std::pow(encrypt, this->m_privateKey);
-    std::cout << "\n";
+    // double encrypt = std::pow(a, this->m_publicKey);
+    // std::cout << "\nDecrypted message : " << std::pow(encrypt, this->m_privateKey);
+    // std::cout << "\n";
 }
