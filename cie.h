@@ -1,3 +1,8 @@
+#ifndef _CIE_H_
+#define _CIE_H_
+
+#include "utils.h"
+
 #include <iostream>
 #include <vector>
 
@@ -34,12 +39,12 @@ public:
     /**
      * @brief Encrypt provided image
      */
-    void encrypt(const Magick::Image& image);
+    void encrypt(Magick::Image& image);
 
     /**
      * @brief Decrypt provided image
      */
-    void decrypt(const Magick::Image& image);
+    void decrypt(Magick::Image& image);
 
     /**
      * dispalye choosen numbers --> to be deleted after
@@ -64,3 +69,5 @@ private:
     double m_publicKey;
     double m_privateKey;
 };
+
+#endif //_CIE_H

@@ -49,7 +49,7 @@ void CImageEncryption::generatePrimeNumbers()
         
     while(true)
     {
-        iSecret = (rand() % 10) + 10;
+        iSecret = (rand() % 100) + 10;
         // iSecret = (rand() % 10000) + 1000;
         if(this->checkForPrime(iSecret) == true)
         {
@@ -99,40 +99,65 @@ int CImageEncryption::coprime(const int& a, const int& b)
     return coprimesNumbers[rand()%coprimesNumbers.size()];
 }
 
-void CImageEncryption::encrypt(const Magick::Image& image)
+void CImageEncryption::encrypt(Magick::Image& image)
 {   
+    // Magick::Image image("640x480", "white");
+    image.write("original_image.png");
     Magick::Image encryptImage(image);
 
     // get image width and height
     unsigned int rows = encryptImage.rows();
     unsigned int columns = encryptImage.columns();
 
-    // Ensure that there are no other references to this image.
-    encryptImage.modifyImage();
-
-    Magick::Pixels view(encryptImage);
-
-    // Declare default color
-    Magick::Color green("GREEN");
-
     // std::cout << "\nEncrypted message : " << std::pow(a, this->m_publicKey);
-    for(unsigned int i = 0; i < rows; i++)
+    for(unsigned int i = 0; i < columns; i++)
     {
-        for(unsigned int j = 0; j < columns; j++)
-        {
-            Magick::PixelPacket *pixelCache = view.get(i, j, 1, 1);
-            // Magick::PixelPacket *pixel = pixelCache + row 
+        for(unsigned int j = 0; j < rows; j++)
+        {   
+            // std::cout << "In for " << i << ":" << j << std::endl;
+            Magick::Color pixelSample = encryptImage.pixelColor(i,j);
+            // std::cout << "Red Quantum:" << pixelSample.redQuantum() << std::endl;
+            pixelSample.redQuantum(CIEUtils::modularExp((pixelSample.redQuantum()), this->m_publicKey));
+            pixelSample.blueQuantum(CIEUtils::modularExp((pixelSample.blueQuantum()), this->m_publicKey));
+            pixelSample.greenQuantum(CIEUtils::modularExp((pixelSample.greenQuantum()), this->m_publicKey));
+            encryptImage.pixelColor(i,j, pixelSample);
         }
     }
 
     // Save changes to image.
-    view.sync();
-
+    encryptImage.write("encrypted_image.png");
 }
 
-void CImageEncryption::decrypt(const Magick::Image& image)
+void CImageEncryption::decrypt(Magick::Image& image)
 {   
     // double encrypt = std::pow(a, this->m_publicKey);
     // std::cout << "\nDecrypted message : " << std::pow(encrypt, this->m_privateKey);
     // std::cout << "\n";
+
+    // image.write("clone_enc_image.png");
+
+    // make copy of image
+    Magick::Image decryptImage(image);
+
+     // get image width and height
+    unsigned int rows = decryptImage.rows();
+    unsigned int columns = decryptImage.columns();
+
+    // std::cout << "\nEncrypted message : " << std::pow(a, this->m_publicKey);
+    for(unsigned int i = 0; i < columns; i++)
+    {
+        for(unsigned int j = 0; j < rows; j++)
+        {   
+            // std::cout << "In for " << i << ":" << j << std::endl;
+            Magick::Color pixelSample = decryptImage.pixelColor(i,j);
+            // std::cout << "Red Quantum:" << pixelSample.redQuantum() << std::endl;
+            pixelSample.redQuantum(CIEUtils::modularExp((pixelSample.redQuantum()), this->m_privateKey));
+            pixelSample.blueQuantum(CIEUtils::modularExp((pixelSample.blueQuantum()), this->m_privateKey));
+            pixelSample.greenQuantum(CIEUtils::modularExp((pixelSample.greenQuantum()), this->m_privateKey));
+            decryptImage.pixelColor(i,j, pixelSample);
+        }
+    }
+
+    // Save changes to image.
+    decryptImage.write("decrypted_image.png");
 }
