@@ -23,7 +23,7 @@ void CIEUtils::displayImage(std::string imagePath_)
     }
 }
 
-int CIEUtils::modularExp(int pixelValue, unsigned int power, int maxRGB=65536)
+int CIEUtils::modularExp(int pixelValue, unsigned int power, long int maxRGB)
 {
     int res = 1;
 

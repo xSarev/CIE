@@ -14,7 +14,7 @@ namespace CIEUtils{
 
     void displayImage(std::string imagePath_);
 
-    int modularExp(int pixelValue, unsigned int power, int maxRGB);
+    int modularExp(int pixelValue, unsigned int power, long int maxRGB=65536);
 }
 
 #endif // _UTILS_CIE_H_
