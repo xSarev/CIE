@@ -45,7 +45,7 @@ int main(int argc, char **argv)
     {
         std::cout << error.what() << std::endl;
     }
-
+    
     pImageEncryption->decrypt(inputImage);
 
     // wait thread to finish

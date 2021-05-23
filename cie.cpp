@@ -49,8 +49,8 @@ void CImageEncryption::generatePrimeNumbers()
         
     while(true)
     {
-        iSecret = (rand() % 100) + 10;
-        // iSecret = (rand() % 10000) + 1000;
+        // iSecret = (rand() % 100) + 10;
+        iSecret = (rand() % 10000) + 1000;
         if(this->checkForPrime(iSecret) == true)
         {
             if(!this->m_firstPrime){
@@ -101,7 +101,6 @@ int CImageEncryption::coprime(const int& a, const int& b)
 
 void CImageEncryption::encrypt(Magick::Image& image)
 {   
-    // Magick::Image image("640x480", "white");
     image.write("original_image.png");
     Magick::Image encryptImage(image);
 
