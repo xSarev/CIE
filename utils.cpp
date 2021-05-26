@@ -45,3 +45,13 @@ int CIEUtils::modularExp(int pixelValue, unsigned int power, long int maxRGB)
 
     return res;
 }
+
+void CIEUtils::startClock(std::clock_t& clock)
+{
+    clock = std::clock();
+}
+
+void CIEUtils::stopClock(std::clock_t& clock, const std::string& text)
+{
+    std::cout << text << " " << (std::clock() - clock) / (double) CLOCKS_PER_SEC << std::endl;
+}
