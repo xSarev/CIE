@@ -49,8 +49,8 @@ void CImageEncryption::generatePrimeNumbers()
         
     while(true)
     {
-        // iSecret = (rand() % 100) + 10;
-        iSecret = (rand() % 10000) + 1000;
+        iSecret = (rand() % 100) + 10;
+        // iSecret = (rand() % 10000) + 1000;
         if(this->checkForPrime(iSecret) == true)
         {
             if(!this->m_firstPrime){
@@ -66,12 +66,12 @@ void CImageEncryption::generatePrimeNumbers()
 
 void CImageEncryption::display()
 {
-    std::cout << "\nFirst choosen number : " << this->m_firstPrime; 
-    std::cout << "\nSecond number : " << this->m_secondPrime;
-    std::cout << "\nN number : " << this->m_n;
-    std::cout << "\nPhi number : " << this->m_phi;
-    std::cout << "\nPublic Key: " << this->m_publicKey;
-    std::cout << "\nPrivate Key : " << this->m_privateKey;
+    std::cout << "First choosen number : " << this->m_firstPrime << std::endl;
+    std::cout << "Second number : " << this->m_secondPrime << std::endl;
+    std::cout << "N number : " << this->m_n << std::endl;
+    std::cout << "Phi number : " << this->m_phi << std::endl;
+    std::cout << "Public Key: " << this->m_publicKey << std::endl;
+    std::cout << "Private Key : " << this->m_privateKey << std::endl;
 }
 
 void CImageEncryption::computeAlgorithm()
