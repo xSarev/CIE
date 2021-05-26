@@ -35,18 +35,16 @@ int main(int argc, char **argv)
     pImageEncryption->generatePrimeNumbers();
     pImageEncryption->computeAlgorithm();
     pImageEncryption->display();
-    pImageEncryption->encrypt(inputImage);
 
-    try {
-        CIEUtils::checkImageValid("encrypted_image.png");
-        inputImage.read("encrypted_image.png");
-    }
-    catch(std::exception &error)
-    {
-        std::cout << error.what() << std::endl;
-    }
+    std::clock_t rsaTime;
+
+    CIEUtils::startClock(rsaTime);
+    pImageEncryption->encrypt(inputImage);
+    CIEUtils::stopClock(rsaTime, "Encrypted Time");
     
+    CIEUtils::startClock(rsaTime);
     pImageEncryption->decrypt(inputImage);
+    CIEUtils::stopClock(rsaTime, "Decrypted Time");
 
     // wait thread to finish
     // thread1.join();
