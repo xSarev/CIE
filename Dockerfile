@@ -20,4 +20,4 @@ ENV IMG_PATH=/usr/src/CIE/panda.jpeg
 
 USER ${USERNAME}
 
-CMD ["./TEST", "${IMG_PATH}"]
+ENTRYPOINT ["./TEST", "${IMG_PATH}"]
